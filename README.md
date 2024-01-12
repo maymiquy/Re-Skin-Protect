@@ -1,5 +1,4 @@
 # Re-Skin-Protect
-GDSC HackFest 2024 - TechTitans
 
 We want to make a solution about skincare recycling product application, where every person who participate gonna get a reward everytime they put in a product in a located trash bin point. 
 
