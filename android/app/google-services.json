@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846345958834",
+    "project_id": "reskin-protect",
+    "storage_bucket": "reskin-protect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846345958834:android:f8e21f71a4e0275270e0ab",
+        "android_client_info": {
+          "package_name": "com.example.reskin_protect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoFtLc3Kl4ss9oFFkIrcAMii67wNql47k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
