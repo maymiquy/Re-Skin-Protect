@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '846345958834',
     projectId: 'reskin-protect',
     storageBucket: 'reskin-protect.appspot.com',
+    iosClientId: '846345958834-fqa0t3jkfi1bl48uavn6qfocuf9ov96o.apps.googleusercontent.com',
     iosBundleId: 'com.example.reskinProtect',
   );
 }

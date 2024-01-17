@@ -12,7 +12,12 @@
           "package_name": "com.example.reskin_protect"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "846345958834-g4m2l4ng2c47bfimol7fqhaj6cks43di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAoFtLc3Kl4ss9oFFkIrcAMii67wNql47k"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846345958834-g4m2l4ng2c47bfimol7fqhaj6cks43di.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "846345958834-fqa0t3jkfi1bl48uavn6qfocuf9ov96o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reskinProtect"
+              }
+            }
+          ]
         }
       }
     }
