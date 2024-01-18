@@ -11,6 +11,184 @@ class HomeInfo extends StatefulWidget {
   State<HomeInfo> createState() => _HomeInfoState();
 }
 
+class HomeInfoNav extends StatelessWidget {
+  const HomeInfoNav({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          homeInfoOne(),
+          homeInfoTwo(),
+          homeInfoThree(),
+        ],
+      ),
+    );
+  }
+
+  Stack homeInfoOne() {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        Container(
+          height: 120,
+          width: 120,
+          decoration: BoxDecoration(
+            color: const Color(0xFFC7EEE3),
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Image.asset('assets/images/ellipse-2.png', scale: 0.7),
+        ),
+        Positioned(
+          top: 55,
+          left: 10,
+          child: Text(
+            "Daur\nUlang",
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF59D4AD),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 10,
+          left: 80,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF59D4AD),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Image.asset(
+                'assets/images/recycle.png',
+                scale: 0.7,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Stack homeInfoThree() {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        Container(
+          height: 120,
+          width: 120,
+          decoration: BoxDecoration(
+            color: const Color(0xffE4E7FB),
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Image.asset('assets/images/ellipse-3.png', scale: 0.7),
+        ),
+        Positioned(
+          top: 55,
+          left: 10,
+          child: Text(
+            "Mitra\nBisnis",
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF467DF8),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 10,
+          left: 70,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xff467DF8),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Image.asset(
+                'assets/images/handshake.png',
+                scale: 0.6,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Container homeInfoTwo() {
+    return Container(
+      margin: const EdgeInsets.only(right: 10, left: 10),
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Container(
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFECE4),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.asset('assets/images/ellipse-1.png', scale: 0.55),
+          ),
+          Positioned(
+            top: 55,
+            left: 10,
+            child: Text(
+              "Tukarkan\nPoin",
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFFF7A582),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: 80,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF7A582),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Text(
+                  "Rp",
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -39,6 +217,26 @@ class HomePage extends StatelessWidget {
         ),
         const ProfileInfo(),
         const HomeInfo(),
+        Container(
+          margin: const EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 20, bottom: 5),
+                child: Text(
+                  'Mari Selamatkan Lingkungan',
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              const HomeInfoNav()
+            ],
+          ),
+        )
       ],
     );
   }
@@ -286,7 +484,7 @@ class _HomeInfoState extends State<HomeInfo> {
                   child: Center(
                     child: Text(_homeInfoModel[1].description,
                         style: GoogleFonts.poppins(
-                          fontSize: 15,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         )),
@@ -309,21 +507,22 @@ class _HomeInfoState extends State<HomeInfo> {
 
   @override
   void initState() {
-    const int durationTime = 800; // in milliseconds
+    const int durationTime = 5; // in seconds
     super.initState();
     _pageController = PageController(viewportFraction: 0.9);
-    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+    _timer =
+        Timer.periodic(const Duration(seconds: durationTime), (Timer timer) {
       if (_pageController.page!.round() == _pageController.page &&
           _pageController.page != _homeInfoModel.length - 1) {
         _pageController.animateToPage(
           (_pageController.page! + 1).toInt(),
-          duration: const Duration(milliseconds: durationTime),
+          duration: const Duration(milliseconds: 800),
           curve: Curves.easeIn,
         );
       } else {
         _pageController.animateToPage(
           0,
-          duration: const Duration(milliseconds: durationTime),
+          duration: const Duration(milliseconds: 800),
           curve: Curves.easeIn,
         );
       }
