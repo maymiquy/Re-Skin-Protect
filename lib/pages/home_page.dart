@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reskin_protect/models/home_page_models.dart';
@@ -249,6 +250,10 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    User? _user;
+
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
       child: Row(
@@ -298,26 +303,52 @@ class ProfileInfo extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-              onPressed: null,
-              child: Container(
-                width: 80,
-                height: 30,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF03870C),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Lihat Poin',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
+          SizedBox(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () {},
+                  child: Container(
+                    width: 80,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF03870C),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
-                  ),
-                ),
-              ))
+                    child: const Center(
+                      child: Text(
+                        'Lihat Poin',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  )),
+              TextButton(
+                  onPressed: _auth.signOut,
+                  child: Container(
+                    width: 80,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 171, 11, 11),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Sign Out',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ))
+            ],
+          ))
         ],
       ),
     );
