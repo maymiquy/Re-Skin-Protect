@@ -1,45 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reskin_protect/models/welcome_page_models.dart';
-
-class CreateAccount extends StatelessWidget {
-  const CreateAccount({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      width: 140,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text('Create Account?', style: TextStyle(color: Colors.white)),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/sign-up');
-            },
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.all(0),
-              minimumSize: const Size(0, 0),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: const Text(
-              'Here',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'package:reskin_protect/pages/home_page.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class SwipeHome extends StatefulWidget {
   const SwipeHome({super.key});
@@ -56,11 +20,25 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<WelcomePage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _auth.authStateChanges().listen((event) {
+      setState(() {
+        _user = event;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF5CC162),
-      body: welcomePage(context),
+      body: _user != null ? _redirectHome() : welcomePage(context),
     );
   }
 
@@ -94,22 +72,33 @@ class _HomePageState extends State<WelcomePage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
-                  child: Text(
-                    'Sign In',
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF5CC162),
-                    ),
-                  ),
+                  child: SignInButton(Buttons.google,
+                      text: 'Sign In Google',
+                      onPressed: _handleSignIn,
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
                 ),
               ),
             ),
           ),
-          const CreateAccount()
         ],
       ),
     );
+  }
+
+  void _handleSignIn() {
+    try {
+      GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
+      _auth.signInWithProvider(_googleAuthProvider);
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  _redirectHome() {
+    return const HomePage();
   }
 }
 
